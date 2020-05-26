@@ -4,6 +4,7 @@
 #SBATCH -n 4
 #SBATCH --mem=2G
 #SBATCH -p test
+#SBATCH -o run_sample.out
 
 module purge
 module load StdEnv
