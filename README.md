@@ -18,33 +18,8 @@ cd samples/meanfield_special_e_tensor
 sed -i 's/import pencil/import pencil_old/g' create_emftensors.py
 ```
 
-Create `run_sample.sh` and `run_start.sh` to 
+Copy `run_sample_puhti.sh` and `start_sample_puhti.sh` to samples-directory
 
-
-`start_sample.sh`:
-```sh
-```
-
-`run_sample.sh`:
-```sh
-#!/bin/bash -l
-#SBATCH -A ituomine
-#SBATCH --time=00:15:00
-#SBATCH -n 4
-#SBATCH --mem=2G
-#SBATCH -p test
-
-module purge
-module load StdEnv
-module load hdf5/1.10.4-mpi
-
-PENCIL_HOME=/scratch/ituomine/tuomiss1/pencil-code2
-. ${PENCIL_HOME}/sourceme.sh
-
-pc_run
-```
-
-### Isotropic alpha
 
 Compile sample:
 ```sh
