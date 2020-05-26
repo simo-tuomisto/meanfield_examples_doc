@@ -18,8 +18,10 @@ cd $PENCIL_HOME/samples/meanfield_special_e_tensor
 sed -i 's/import pencil/import pencil_old/g' create_emftensors.py
 ```
 
-Copy `run_sample_puhti.sh` and `start_sample_puhti.sh` into the same directory:
+Download `run_sample_puhti.sh` and `start_sample_puhti.sh` into the samples directory:
 ```sh
+wget https://raw.githubusercontent.com/simo-tuomisto/meanfield_examples_doc/master/run_sample_puhti.sh
+wget https://raw.githubusercontent.com/simo-tuomisto/meanfield_examples_doc/master/start_sample_puhti.sh
 ```
 
 ### Before running the samples
