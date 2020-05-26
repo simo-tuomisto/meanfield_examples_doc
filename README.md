@@ -2,7 +2,7 @@
 
 ## Puhti
 
-### Common steps
+### Setting up the repository and getting slurm scripts
 
 Clone pencil-code and check out a version that compiles:
 ```sh
@@ -22,48 +22,22 @@ Copy `run_sample_puhti.sh` and `start_sample_puhti.sh` into the same directory:
 ```sh
 ```
 
-### Isotropic Alpha
+### Before running the samples
 
-Go to the sample directory:
-```sh
-cd $PENCIL_HOME/samples/meanfield_special_e_tensor/isotropic_alpha/
-```
+All samples can be run in the same fashion. You can use the commands below, but
+first set the `$SAMPLE_NAME` environment variable:
 
-Compile sample:
-```sh
-module purge
-module load StdEnv
-module load hdf5/1.10.4-mpi 
-pc_setupsrc
-pc_build -f compilers/Intel_MPI REAL_PRECISION=double
-```
+- Isotropic alpha - `export SAMPLE_NAME=isotropic_alpha`
+- Jouve 2008 Benchmark A - `export SAMPLE_NAME=Jouve-2008-benchmarkA`
+- Jouve 2008 Benchmark B - `export SAMPLE_NAME=Jouve-2008-benchmarkB`
+- Jouve 2008 Benchmark B - `export SAMPLE_NAME=Jouve-2008-benchmarkB`
+- Steenbeck-Krause 1969 model1 - `export SAMPLE_NAME=Steenbeck-Krause-1969-model1`
 
-# Run start
-```sh
-mkdir data
-sbatch ../start_sample_puhti.sh
-```
-
-Create emftensors:
-```sh
-module purge
-module load python-env
-python ../create_emftensors.py .
-```
-
-Run sample:
-
-```sh
-sbatch ../run_sample_puhti.sh
-
-diff data/time_series.dat reference.out.double
-```
-
-### Jouve 2008 Benchmark A
+### Running the sample
 
 Compile sample:
 ```sh
-cd $PENCIL_HOME/samples/meanfield_special_e_tensor/Jouve-2008-benchmarkA
+cd $PENCIL_HOME/samples/meanfield_special_e_tensor/$SAMPLE_NAME
 module purge
 module load StdEnv
 module load hdf5/1.10.4-mpi 
@@ -81,44 +55,12 @@ Create emftensors:
 ```sh
 module purge
 module load python-env
-sed -i 's/import pencil/import pencil_old/g' ../create_emftensors.py
 python ../create_emftensors.py .
 ```
 
 Run sample:
 ```sh
-sbatch ../run_sample_puhti.sh
-
-diff data/time_series.dat reference.out.double
-```
-### Jouve 2008 Benchmark B
-
-Compile sample:
-```sh
-cd $PENCIL_HOME/samples/meanfield_special_e_tensor/Jouve-2008-benchmarkB
 module purge
-module load StdEnv
-module load hdf5/1.10.4-mpi 
-pc_setupsrc
-pc_build -f compilers/Intel_MPI REAL_PRECISION=double
-```
-
-Run start:
-```sh
-mkdir data
-sbatch ../start_sample_puhti.sh
-```
-
-Create emftensors:
-```sh
-module purge
-module load python-env
-sed -i 's/import pencil/import pencil_old/g' ../create_emftensors.py
-python ../create_emftensors.py .
-```
-
-Run sample:
-```sh
 sbatch ../run_sample_puhti.sh
 
 diff data/time_series.dat reference.out.double
